@@ -11,6 +11,12 @@ use namada_sdk::{
     tendermint::abci::Code,
     tx::data::ResultCode,
     Namada,
+    address::Address,
+    masp::TransferSource,
+    masp::TransferTarget,
+    key::common,
+    string_encoding::Format,
+    key::SigScheme,
 };
 use reqwest::header::USER_AGENT;
 
@@ -110,7 +116,7 @@ pub async fn request_transfer(
         return Err(FaucetError::InvalidWithdrawLimit(state.withdraw_limit).into());
     }
 
-    let player_id_pk: PublicKey = if let Ok(pk) = payload.player_id.parse() {
+    let player_id_pk: common::PublicKey = if let Ok(pk) = payload.player_id.parse() {
         pk
     } else {
         return Err(FaucetError::InvalidPublicKey.into());
@@ -127,7 +133,7 @@ pub async fn request_transfer(
         return Err(FaucetError::InvalidSignature.into());
     };
 
-    if (SigScheme::verify_signature(
+    if (common::SigScheme::verify_signature(
         &player_id_pk,
         // NOTE: signing over the hex encoded challenge data
         &payload.challenge.as_bytes(),

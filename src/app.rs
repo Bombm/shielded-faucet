@@ -21,6 +21,9 @@ use namada_sdk::{
     masp::fs::FsShieldedUtils,
     wallet::fs::FsWalletUtils,
     NamadaImpl,
+    chain::ChainId,
+    address::Address,
+    key::RefTo,
 };
 use rand::{distributions::Alphanumeric, thread_rng, Rng};
 use serde_json::json;
@@ -33,6 +36,7 @@ use tower_http::{
 
 use crate::{app_state::AppState, config::AppConfig, state::faucet::FaucetState};
 use crate::{handler::faucet as faucet_handler, sdk::utils::sk_from_str};
+
 
 lazy_static! {
     static ref HTTP_TIMEOUT: u64 = 30;

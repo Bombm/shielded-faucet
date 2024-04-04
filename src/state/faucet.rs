@@ -11,6 +11,7 @@ use tokio::sync::RwLock;
 use namada_sdk::{
     io::NullIo, masp::fs::FsShieldedUtils, wallet::fs::FsWalletUtils,
     NamadaImpl,
+    address::Address,
 };
 use tendermint_rpc::HttpClient;
 

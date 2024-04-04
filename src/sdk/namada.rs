@@ -3,6 +3,7 @@ use namada_sdk::{
     masp::{fs::FsShieldedUtils, ShieldedContext},
     wallet::{fs::FsWalletUtils, Wallet},
     NamadaImpl,
+    key::common::SecretKey,
 };
 use tendermint_rpc::HttpClient;
 
